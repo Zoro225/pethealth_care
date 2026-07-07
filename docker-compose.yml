@@ -1,0 +1,52 @@
+services:
+
+  mysql:
+    image: mysql:8.4
+    container_name: pethealth-mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: pethealthdbb
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - pethealth-network
+
+
+  backend:
+    image: pethealth-backend:v1
+    container_name: pethealth-backend
+    restart: always
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pethealthdbb?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    ports:
+      - "8081:8080"
+    networks:
+      - pethealth-network
+
+
+  frontend:
+    image: pethealth-frontend:v1
+    container_name: pethealth-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    networks:
+      - pethealth-network
+
+
+volumes:
+  mysql-data:
+
+
+networks:
+  pethealth-network:
+    driver: bridge
