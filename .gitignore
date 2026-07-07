@@ -1,0 +1,22 @@
+# Node
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+
+# Java Maven
+target/
+backend/target/
+
+# Environment
+.env
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
