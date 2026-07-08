@@ -1,119 +1,170 @@
-<<<<<<< HEAD
 # 🐾 Pet Health Tracker — Full Stack App
 
-> Spring Boot 3 + React 18 + MySQL | Ready to run in 3 steps
+Spring Boot 3 + React 18 + MySQL | Ready to run locally or with Docker
 
----
+## 📌 Overview
+
+Pet Health Tracker is a full-stack web application for managing pet health records.  
+It allows users to add, update, delete, search, and analyze pet data through a Spring Boot REST API and a React-based frontend.
+
+## 🛠️ Tech Stack
+
+- **Backend:** Spring Boot 3, Java 17, Maven
+- **Frontend:** React 18, Vite, Node.js
+- **Database:** MySQL 8
+- **DevOps:** Docker, Docker Compose, Jenkins
 
 ## ✅ Prerequisites
 
-Make sure these are installed:
-- **Java 17+** → `java -version`
-- **Maven 3.8+** → `mvn -version`
-- **Node.js 18+** → `node -version`
-- **MySQL 8+** → running locally on port 3306
+### For manual setup
+- Java 17+
+- Maven 3.8+
+- Node.js 18+
+- MySQL 8+
 
----
+### For Docker setup
+- Docker
+- Docker Compose
 
-## 🗄️ Step 1 — Create the Database
+## 🗄️ Manual Setup
 
-Open MySQL and run:
+### Step 1 — Create the Database
+
 ```sql
 CREATE DATABASE pettracker_db;
 ```
-Then open `backend/src/main/resources/application.properties` and update:
+
+Update `backend/src/main/resources/application.properties`:
+
 ```properties
 spring.datasource.username=root
 spring.datasource.password=YOUR_MYSQL_PASSWORD
 ```
 
----
-
-## 🚀 Step 2 — Run the Backend
+### Step 2 — Run the Backend
 
 ```bash
 cd backend
 mvn spring-boot:run
 ```
-✅ Backend starts at → **http://localhost:8080**
 
-Spring will **auto-create** the `pets` table in MySQL.
+Backend URL: `http://localhost:8080`
 
----
+### Step 3 — Run the Frontend
 
-## ⚛️ Step 3 — Run the Frontend
-
-Open a **new terminal**:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-✅ Frontend starts at → **http://localhost:5173**
 
----
+Frontend URL: `http://localhost:5173`
+
+## 🐳 Docker Compose Setup
+
+Run the full application stack with:
+
+```bash
+docker compose up --build
+```
+
+Run in detached mode:
+
+```bash
+docker compose up -d
+```
+
+Stop services:
+
+```bash
+docker compose down
+```
+
+Stop and remove volumes:
+
+```bash
+docker compose down -v
+```
+
+### Services
+
+- Frontend: `http://localhost:5173`
+- Backend: `http://localhost:8080`
+- MySQL: `localhost:3306`
+
+## ⚙️ Environment Variables
+
+Example Docker environment values:
+
+```env
+MYSQL_DATABASE=pettracker_db
+MYSQL_USER=root
+MYSQL_PASSWORD=yourpassword
+SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/pettracker_db
+SPRING_DATASOURCE_USERNAME=root
+SPRING_DATASOURCE_PASSWORD=yourpassword
+```
 
 ## 📡 API Endpoints
 
-| Method | URL | Description |
-|--------|-----|-------------|
+| Method | Endpoint | Description |
+|---|---|---|
 | GET | `/pets` | Get all pets |
 | GET | `/pets/{id}` | Get pet by ID |
 | POST | `/pets` | Add new pet |
 | PUT | `/pets/{id}` | Update pet |
 | DELETE | `/pets/{id}` | Delete pet |
-| GET | `/pets/search?name=` | Search by name |
-| GET | `/pets/dashboard` | Analytics stats |
+| GET | `/pets/search?name=` | Search pets by name |
+| GET | `/pets/dashboard` | Get dashboard analytics |
 
----
+## 🔄 CI/CD with GitHub Actions
+
+This project can use GitHub Actions for continuous integration.
+
+### Example pipeline steps
+- Checkout the code
+- Set up Java
+- Set up Node.js
+- Build backend with Maven
+- Build frontend with npm
+- Build Docker images
+- Run tests
 
 ## 📁 Project Structure
 
-```
+```bash
 PetHealthTracker/
-├── backend/                        ← Spring Boot Maven Project
-│   ├── pom.xml                     ← Maven dependencies
+├── backend/
+│   ├── Dockerfile
+│   ├── pom.xml
 │   └── src/main/
-│       ├── java/com/pettracker/
-│       │   ├── PetHealthTrackerApplication.java
-│       │   ├── controller/PetController.java
-│       │   ├── service/PetService.java
-│       │   ├── service/PetServiceImpl.java
-│       │   ├── repository/PetRepository.java
-│       │   ├── model/Pet.java
-│       │   ├── dto/PetDTO.java
-│       │   └── exception/
-│       │       ├── ResourceNotFoundException.java
-│       │       └── GlobalExceptionHandler.java
-│       └── resources/
-│           └── application.properties
-│
-└── frontend/                       ← React + Vite Project
-    ├── package.json
-    ├── vite.config.js
-    ├── index.html
-    └── src/
-        ├── App.jsx
-        ├── index.jsx
-        ├── index.css
-        ├── api/petApi.js
-        └── components/
-            ├── Dashboard.jsx
-            ├── PetList.jsx
-            └── PetForm.jsx
+├── frontend/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── src/
+├── docker-compose.yml
+├── .dockerignore
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+└── README.md
 ```
-
----
 
 ## 🔧 Open in IntelliJ IDEA
 
-1. **File → Open** → Select the `backend/` folder
-2. IntelliJ will detect the `pom.xml` and auto-import Maven
-3. Wait for indexing → Click **Run** ▶ on `PetHealthTrackerApplication`
+- Open the `backend/` folder
+- Import the Maven project
+- Run `PetHealthTrackerApplication`
 
 ## 🔧 Open in VS Code
 
-1. Open `frontend/` folder in VS Code
+- Open the `frontend/` folder
+- Run:
+
+```bash
+npm install
+npm run dev
+```
 2. Open terminal → `npm install && npm run dev`
 =======
 # pethealthcare
